@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import './App.css';
 import * as firebase from "firebase";
-
-const Datastore = require('@google-cloud/datastore');
-const projectId = 'pixxiti';
-const datastore = Datastore({
-  projectId: projectId,
-  keyFilename: '../key.json'
-});
+import Box from './Box'
+// const Datastore = require('@google-cloud/datastore');
+// const projectId = 'pixxiti';
+// const datastore = Datastore({
+//   projectId: projectId,
+//   keyFilename: '../key.json'
+// });
 
 var config = {
     apiKey: "AIzaSyAOvr3TtSVo9YkPz-q8Z3IeTvWdPsoFzjI",
@@ -32,23 +32,23 @@ class App extends Component {
     //   console.log(errorCode, errorMessage);
     // });
     //
-    var str = ''
-    for (var i = 0; i < 1000; i++) {
-    	for (var j = 0; j < 1000; j++) {
-        var object = {c: 'A'}
-        object[i] = i;
-        object[j] = j;
-        console.log(object)
-        firebase.database().ref('pixel_'+i+'_'+j).set({
-            x: i,
-            y: j,
-            c: '0'
-        });
-        // str += 'A';
-        // firebase.database().ref('pixels'+i+j).remove();
-        // str += 'A';
-    	}
-    }
+    // var str = ''
+    // for (var i = 0; i < 1000; i++) {
+    // 	for (var j = 0; j < 1000; j++) {
+    //     var object = {c: 'A'}
+    //     object[i] = i;
+    //     object[j] = j;
+    //     console.log(object)
+    //     firebase.database().ref('pixel_'+i+'_'+j).set({
+    //         x: i,
+    //         y: j,
+    //         c: '0'
+    //     });
+    //     // str += 'A';
+    //     // firebase.database().ref('pixels'+i+j).remove();
+    //     // str += 'A';
+    // 	}
+    // }
 
     // console.log(str.length)
 
@@ -107,12 +107,21 @@ class App extends Component {
     }
   }
 
+  test (val) {
+    if (val === 'UCSB') {
+      return 'WELCOME TO UCSB'
+    } else {
+      return 'WELCOME TO THE WORLD'
+    }
+  }
+
   render() {
     return (
       <div className="App">
         <div className="App-header">
-          <h2>Welcome to React</h2>
+          <h2>{this.test('asfasfasfasfasfasf')}</h2>
         </div>
+        <Box/>
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
