@@ -40,8 +40,8 @@ class App extends Component {
         object[j] = j;
         console.log(object)
         firebase.database().ref('pixel_'+i+'_'+j).set({
-            i: i,
-            j: j,
+            x: i,
+            y: j,
             c: '0'
         });
         // str += 'A';
