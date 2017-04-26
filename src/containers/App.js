@@ -32,23 +32,23 @@ class App extends Component {
     //   console.log(errorCode, errorMessage);
     // });
     //
-    // var str = ''
-    // for (var i = 0; i < 100; i++) {
-    // 	for (var j = 0; j < 100; j++) {
-    //     var object = {c: 'A'}
-    //     object[i] = i;
-    //     object[j] = j;
-    //     console.log(object)
-    //     // firebase.database().ref('pixels').set({
-    //     //     i: i,
-    //     //     j: j,
-    //     //     c: 'A'
-    //     // });
-    //     // str += 'A';
-    //     // firebase.database().ref('pixels'+i+j).remove();
-    //     // str += 'A';
-    // 	}
-    // }
+    var str = ''
+    for (var i = 0; i < 1000; i++) {
+    	for (var j = 0; j < 1000; j++) {
+        var object = {c: 'A'}
+        object[i] = i;
+        object[j] = j;
+        console.log(object)
+        firebase.database().ref('pixel_'+i+'_'+j).set({
+            i: i,
+            j: j,
+            c: '0'
+        });
+        // str += 'A';
+        // firebase.database().ref('pixels'+i+j).remove();
+        // str += 'A';
+    	}
+    }
 
     // console.log(str.length)
 
