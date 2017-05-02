@@ -1,28 +1,21 @@
 import React, { Component } from 'react';
 import './App.css';
-import * as firebase from "firebase";
-import Box from './Box'
-// const Datastore = require('@google-cloud/datastore');
-// const projectId = 'pixxiti';
-// const datastore = Datastore({
-//   projectId: projectId,
-//   keyFilename: '../key.json'
-// });
+// import * as firebase from "firebase";
+import VisibleBoard from '../containers/VisibleBoard'
 
-var config = {
-    apiKey: "AIzaSyAOvr3TtSVo9YkPz-q8Z3IeTvWdPsoFzjI",
-    authDomain: "pixxiti.firebaseapp.com",
-    databaseURL: "https://pixxiti.firebaseio.com",
-    projectId: "pixxiti",
-    storageBucket: "pixxiti.appspot.com",
-    messagingSenderId: "612470212917"
-  };
-
+// var config = {
+//     apiKey: "AIzaSyAOvr3TtSVo9YkPz-q8Z3IeTvWdPsoFzjI",
+//     authDomain: "pixxiti.firebaseapp.com",
+//     databaseURL: "https://pixxiti.firebaseio.com",
+//     projectId: "pixxiti",
+//     storageBucket: "pixxiti.appspot.com",
+//     messagingSenderId: "612470212917"
+//   };
 
 class App extends Component {
 
   componentDidMount () {
-    firebase.initializeApp(config);
+    // firebase.initializeApp(config);
 
     // firebase.auth().signInAnonymously().catch(function(error) {
     //   // Handle Errors here.
@@ -90,41 +83,15 @@ class App extends Component {
     // });
     //
     // console.log(this.props)
-
-  }
-
-  // connect () {
-  //   return new Promise(resolve => {
-  //     const database = firebase.database();
-  //     const connectionRef = database.ref('.info/connected');
-  //     connectionRef.on('value', resolve);
-  //   });
-  // }
-  //
-  test_one_two (val) {
-    if (val && val.A.B) {
-      console.log(val.A.B)
-    }
-  }
-
-  test (val) {
-    if (val === 'UCSB') {
-      return 'WELCOME TO UCSB'
-    } else {
-      return 'WELCOME TO THE WORLD'
-    }
   }
 
   render() {
     return (
       <div className="App">
         <div className="App-header">
-          <h2>{this.test('asfasfasfasfasfasf')}</h2>
+          <h2>Pixxiti</h2>
         </div>
-        <Box/>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <VisibleBoard/>
       </div>
     );
   }
