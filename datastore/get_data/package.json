@@ -1,0 +1,14 @@
+{
+  "name": "get_data",
+  "version": "0.0.1",
+  "description": "Get the current board in a nice array",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Brent Kirkland",
+  "license": "ISC",
+  "dependencies": {
+    "@google-cloud/datastore": "^1.0.1"
+  }
+}
