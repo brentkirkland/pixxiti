@@ -1,6 +1,7 @@
 {
   "name": "pixxiti",
   "version": "0.1.0",
+  "homepage": "http://brentkirkland.github.io/",
   "private": true,
   "dependencies": {
     "@google-cloud/datastore": "^1.0.0",
