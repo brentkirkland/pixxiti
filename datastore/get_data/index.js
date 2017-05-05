@@ -8,45 +8,39 @@ const datastore = Datastore({
 
 exports.getData = function getData (req, res) {
 
-  let board_size = parseInt(req.query.board) || 16;
+  // let board_size = parseInt(req.query.board) || 16;
 
   const query = datastore.createQuery('board')
 
   datastore.runQuery(query)
   .then((results) => {
     res.setHeader('Access-Control-Allow-Origin', '*')
-    // res.send(results)
 
-    var start = [
-      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-    ]
+    var i = 0;
+    var arr = [];
+    var arrs = [];
+    var board_size = 50;
+
+    function zeros(dimensions) {
+      var array = [];
+
+      for (var i = 0; i < dimensions[0]; ++i) {
+          array.push(dimensions.length == 1 ? 0 : zeros(dimensions.slice(1)));
+      }
+
+      return array;
+    }
+
+    arrs = zeros([board_size,board_size])
 
     var arrays = results[0]
 
-    for (var i = 0; i < arrays.length; i++) {
-      if (arrays[i].i < 16 && arrays[i].j < 16) {
-        start[arrays[i].i][arrays[i].j] = arrays[i].c
+    for (i = 0; i < arrays.length; i++) {
+      if (arrays[i].i < board_size && arrays[i].j < board_size) {
+        arrs[arrays[i].i][arrays[i].j] = arrays[i].c
       }
     }
-
-    res.send(start)
-
-
+    res.send(arrs)
   });
 
 };

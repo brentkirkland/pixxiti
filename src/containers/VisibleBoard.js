@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { changeColor } from '../actions'
+import { changeColor, getInitialBoard } from '../actions'
 import Board from '../components/Board'
 
 const mapStateToProps = (state) => ({
@@ -7,7 +7,8 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = {
-  onBoardClick: changeColor
+  onBoardClick: changeColor,
+  getBoard: getInitialBoard
 }
 
 const VisibleBoard = connect(

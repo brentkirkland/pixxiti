@@ -85,12 +85,20 @@ class App extends Component {
     // console.log(this.props)
   }
 
+  // render() {
+  //   return (
+  //     <div className="App">
+  //       <div className="App-header">
+  //         <h2>Pixxiti</h2>
+  //       </div>
+  //       <VisibleBoard/>
+  //     </div>
+  //   );
+  // }
+
   render() {
     return (
       <div className="App">
-        <div className="App-header">
-          <h2>Pixxiti</h2>
-        </div>
         <VisibleBoard/>
       </div>
     );

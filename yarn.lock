@@ -4678,6 +4678,12 @@ react-scripts@0.9.5:
   optionalDependencies:
     fsevents "1.0.17"
 
+react-window-resize-listener@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/react-window-resize-listener/-/react-window-resize-listener-1.1.0.tgz#1aff0059e8f1f58f8d865f9ce17b1b1f9c5b277f"
+  dependencies:
+    lodash.debounce "^3.1.1"
+
 react@^15.5.4:
   version "15.5.4"
   resolved "https://registry.yarnpkg.com/react/-/react-15.5.4.tgz#fa83eb01506ab237cdc1c8c3b1cea8de012bf047"
