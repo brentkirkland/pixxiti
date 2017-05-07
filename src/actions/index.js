@@ -11,22 +11,48 @@ export const getInitialBoard = (json) => ({
 })
 
 
-// export const getInitialBoard = () => {
-//   console.log('test!')
-//   var data = {
-//     method: 'GET',
-//   }
-//   var j;
-//
-//   function yo (payload) {
-//     console.log(payload)
-//     return {
-//       type: 'GET_BOARD',
-//       payload: payload
-//     }
-//   }
-//
-//   return fetch('https://us-central1-pixxiti.cloudfunctions.net/getData', data)
-//   .then(res => res.json())
-//   .then(json => yo(json))
-// }
+// CAMERA actions
+
+export const mouseDown = (moveable, startX, startY) => ({
+  type: 'MOUSE_DOWN',
+  moveable: moveable,
+  startX: startX,
+  startY: startY
+})
+
+export const mouseMove = (transX, transY) => ({
+  type: 'MOUSE_MOVE',
+  transX: transX,
+  transY: transY
+})
+
+export const mouseUpOne = (zoom, moveable, prevX, prevY, transX, transY) => ({
+  type: 'MOUSE_UP_ONE',
+  zoom: zoom,
+  moveable: moveable,
+  prevX: prevX,
+  prevY: prevY,
+  transX: transX,
+  transY: transY
+})
+
+export const mouseUpTwo = (zoom, moveable, prevX, prevY) => ({
+  type: 'MOUSE_UP_TWO',
+  zoom: zoom,
+  moveable: moveable,
+  prevX: prevX,
+  prevY: prevY,
+})
+
+export const mouseUpThree = (moveable, prevX, prevY) => ({
+  type: 'MOUSE_UP_THREE',
+  moveable: moveable,
+  prevX: prevX,
+  prevY: prevY
+})
+
+export const handleResize = (width, height) => ({
+  type: 'HANDLE_RESIZE',
+  width: width,
+  height: height
+})
