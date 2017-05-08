@@ -10,6 +10,18 @@ export const getInitialBoard = (json) => ({
   payload: json
 })
 
+// DRAW actions
+
+export const changeDrawable = () => ({
+  type: 'CHANGE_DRAWABLE'
+})
+
+export const pickColor = (c) => ({
+  type: 'PICK_COLOR',
+  color: c
+})
+
+
 
 // CAMERA actions
 

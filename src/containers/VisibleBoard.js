@@ -6,13 +6,15 @@ import { changeColor,
          mouseMove,
          mouseUpOne,
          mouseUpTwo,
-         mouseUpThree
+         mouseUpThree,
+         changeDrawable
        } from '../actions'
 import Board from '../components/Board'
 
 const mapStateToProps = (state) => ({
   board: state.colors,
-  camera: state.camera
+  camera: state.camera,
+  draw: state.draw
 })
 
 const mapDispatchToProps = {
@@ -23,7 +25,8 @@ const mapDispatchToProps = {
   mouseMove: mouseMove,
   mouseUpOne: mouseUpOne,
   mouseUpTwo: mouseUpTwo,
-  mouseUpThree: mouseUpThree
+  mouseUpThree: mouseUpThree,
+  changeDrawable: changeDrawable
 }
 
 const VisibleBoard = connect(

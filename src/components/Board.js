@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types'
 import './App.css';
 import * as firebase from "firebase";
+import VisibleColorPicker from '../containers/VisibleColorPicker'
 
 const config = {
     apiKey: "AIzaSyAOvr3TtSVo9YkPz-q8Z3IeTvWdPsoFzjI",
@@ -13,20 +14,18 @@ const config = {
   };
 
 class Board extends Component {
-
-  componentWillMount () {
-    this.setState({
-      drawable: false
-    })
-  }
+  //
+  // componentWillMount () {
+  //   this.setState({
+  //     drawable: false
+  //   })
+  // }
 
   componentDidMount () {
     firebase.initializeApp(config);
     this.getBoard()
     var state = firebase.database().ref('pixel');
     state.on('value', function(snapshot) {
-      console.log('hi!')
-      console.log(snapshot.val().c)
       this.props.onBoardClick(snapshot.val().c, snapshot.val().y, snapshot.val().x)
       return snapshot.val()
     }, this)
@@ -62,21 +61,7 @@ class Board extends Component {
   }
 
   mouseDown (e) {
-    var bld = this.props.camera.transX*this.props.camera.zoom + this.props.camera.width/2 - 50*this.props.camera.zoom/2
-    var i = Math.floor((e.clientX - bld)/this.props.camera.zoom)
-    var btd = this.props.camera.transY*this.props.camera.zoom + this.props.camera.height/2 - 50*this.props.camera.zoom/2
-    var j = Math.floor((e.clientY - btd)/this.props.camera.zoom)
     this.props.mouseDown(true, e.clientX, e.clientY)
-    // tell firebase about the good news
-    if (this.props.camera.drawable && !this.props.camera.moveable) {
-      this.props.onBoardClick(15, j, i)
-      firebase.database().ref('pixel').set({
-        x: i,
-        y: j,
-        c: 15
-      });
-      console.log('set')
-    }
     return true
   }
 
@@ -101,59 +86,66 @@ class Board extends Component {
       var transX = -1*(e.clientX - bld - 100)/4
       var transY = -1*(e.clientY - btd - 100)/4
       this.props.mouseUpOne(40, false, prevX, prevY, transX, transY)
+      this.props.changeDrawable()
     } else if (e.button === 2) {
       this.props.mouseUpTwo(4, false, this.props.camera.transX, this.props.camera.transY)
+      this.props.changeDrawable()
     } else {
+      if (this.props.camera.transX === this.props.camera.prevX
+      && this.props.camera.transY === this.props.camera.prevY
+      && this.props.draw.color !== -1) {
+        bld = this.props.camera.transX*this.props.camera.zoom + this.props.camera.width/2 - 50*this.props.camera.zoom/2
+        var i = Math.floor((e.clientX - bld)/this.props.camera.zoom)
+        btd = this.props.camera.transY*this.props.camera.zoom + this.props.camera.height/2 - 50*this.props.camera.zoom/2
+        var j = Math.floor((e.clientY - btd)/this.props.camera.zoom)
+        if (this.props.draw.drawable && this.props.camera.moveable) {
+          console.log('fuckkkk')
+          this.props.onBoardClick(this.props.draw.color, j, i)
+          firebase.database().ref('pixel').set({
+            x: i,
+            y: j,
+            c: this.props.draw.color
+          });
+          this.updateBoard(i+1, j+1, this.props.draw.color + 1)
+        }
+      }
       this.props.mouseUpThree(false, this.props.camera.transX, this.props.camera.transY)
     }
+  }
 
+  updateBoard (j, i, c) {
+    var url = 'https://us-central1-pixxiti.cloudfunctions.net/putData?i=' + i + '&j=' + j + '&c=' + c
+    fetch(url)
   }
 
   onContextMenu (e) {
     e.preventDefault();
   }
 
-  render_draw_button () {
-    if (this.state.drawable) {
-      return (
-        <div className="draw_button_active" onMouseDown={this.activate_draw.bind(this)}>
-          <h4>Draw</h4>
-        </div>
-      )
-    } else if (this.props.camera.zoom === 40) {
-      return (
-        <div className="draw_button" onMouseDown={this.activate_draw.bind(this)}>
-          <h4>Draw</h4>
-        </div>
-      )
-    } else {
-      return (
-        <div className="draw_button_dead">
-          <h4>Draw</h4>
-        </div>
-      )
-    }
+  activate_draw () {
+    this.props.changeDrawable()
   }
 
-  activate_draw () {
-    this.setState({
-      drawable: !this.state.drawable
-    })
+  get_camera_css () {
+    if (this.props.draw.color === -1) {
+      return "pixxiti-camera-no-cursor"
+    } else {
+      return "pixxiti-camera"
+    }
   }
 
   render() {
     return (
       <div className="pixxiti">
-      <div className="draw">
+      <div className="top">
         <div className="App-header">
           <h2>Pixxiti</h2>
         </div>
-        {this.render_draw_button ()}
       </div>
       <div className="pixxiti-container" style={{height: this.props.camera.height, width: this.props.camera.width}}>
           <div className="pixxiti-viewer"
             style={{flex: '0 0 50px', transform: 'scale(' + this.props.camera.zoom + ',' + this.props.camera.zoom + ')'}}>
-            <div className="pixxiti-camera"
+            <div className={this.get_camera_css()}
               style={{transform: 'translate(' + this.props.camera.transX + 'px,'+ this.props.camera.transY + 'px)'}}
               onMouseDown={this.mouseDown.bind(this)}
               onMouseUp={this.mouseUp.bind(this)}
@@ -164,6 +156,7 @@ class Board extends Component {
             </div>
           </div>
         </div>
+        <VisibleColorPicker/>
       </div>
     );
   }
@@ -172,6 +165,7 @@ class Board extends Component {
 Board.propTypes = {
   board: PropTypes.object.isRequired,
   camera: PropTypes.object.isRequired,
+  draw: PropTypes.object.isRequired,
   handleResize: PropTypes.func.isRequired,
   onBoardClick: PropTypes.func.isRequired,
   getBoard: PropTypes.func.isRequired,
@@ -179,7 +173,8 @@ Board.propTypes = {
   mouseMove: PropTypes.func.isRequired,
   mouseUpOne: PropTypes.func.isRequired,
   mouseUpTwo: PropTypes.func.isRequired,
-  mouseUpThree: PropTypes.func.isRequired
+  mouseUpThree: PropTypes.func.isRequired,
+  changeDrawable: PropTypes.func.isRequired
 }
 
 export default Board;
