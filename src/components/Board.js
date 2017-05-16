@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import './App.css';
 import * as firebase from "firebase";
 import VisibleColorPicker from '../containers/VisibleColorPicker'
+import VisiblePowers from '../containers/VisiblePowers'
 
 const config = {
     apiKey: "AIzaSyAOvr3TtSVo9YkPz-q8Z3IeTvWdPsoFzjI",
@@ -111,13 +112,49 @@ class Board extends Component {
         var j = Math.floor((e.clientY - btd)/this.props.camera.zoom)
         if (this.props.draw.drawable && this.props.camera.moveable) {
           console.log('fuckkkk')
-          this.props.onBoardClick(this.props.draw.color, j, i)
-          firebase.database().ref('pixel').set({
-            x: i,
-            y: j,
-            c: this.props.draw.color
-          });
-          this.updateBoard(i+1, j+1, this.props.draw.color + 1)
+          console.log(this.props.powers)
+          var a, b
+          if (this.props.powers.megaBomb) {
+            for (a = i - 7; a < i + 8; a++) {
+              for (b = j - 7; b < j + 8; b++) {
+
+                this.props.onBoardClick(this.props.draw.color, b, a)
+
+                firebase.database().ref('pixel').set({
+                  x: a,
+                  y: b,
+                  c: this.props.draw.color
+                });
+
+                this.updateBoard(a+1, b+1, this.props.draw.color + 1)
+              }
+            }
+            this.props.selectMegaBomb() 
+          } else if (this.props.powers.simpleBomb) {
+            for (a = i - 2; a < i + 3; a++) {
+              for (b = j - 2; b < j + 3; b++) {
+
+                this.props.onBoardClick(this.props.draw.color, b, a)
+
+                firebase.database().ref('pixel').set({
+                  x: a,
+                  y: b,
+                  c: this.props.draw.color
+                });
+
+                this.updateBoard(a+1, b+1, this.props.draw.color + 1)
+              }
+            }
+            this.props.selectSimpleBomb() 
+          } else {
+            this.props.onBoardClick(this.props.draw.color, j, i)
+            firebase.database().ref('pixel').set({
+              x: i,
+              y: j,
+              c: this.props.draw.color
+            });
+            this.updateBoard(i+1, j+1, this.props.draw.color + 1)
+          }
         }
       }
       this.props.mouseUpThree(false, this.props.camera.transX, this.props.camera.transY)
@@ -125,6 +162,7 @@ class Board extends Component {
   }
 
   updateBoard (j, i, c) {
+    this.props.givePoint();
     var url = 'https://us-central1-pixxiti.cloudfunctions.net/putData?i=' + i + '&j=' + j + '&c=' + c
     fetch(url)
   }
@@ -152,6 +190,7 @@ class Board extends Component {
         <div className="App-header">
           <h2>Pixxiti</h2>
         </div>
+          <VisiblePowers/>
       </div>
       <div className="pixxiti-container" style={{height: this.props.camera.height, width: this.props.camera.width}}>
           <div className="pixxiti-viewer"
@@ -177,6 +216,7 @@ Board.propTypes = {
   board: PropTypes.object.isRequired,
   camera: PropTypes.object.isRequired,
   draw: PropTypes.object.isRequired,
+  powers: PropTypes.object.isRequired,
   handleResize: PropTypes.func.isRequired,
   onBoardClick: PropTypes.func.isRequired,
   getBoard: PropTypes.func.isRequired,
@@ -185,7 +225,10 @@ Board.propTypes = {
   mouseUpOne: PropTypes.func.isRequired,
   mouseUpTwo: PropTypes.func.isRequired,
   mouseUpThree: PropTypes.func.isRequired,
-  changeDrawable: PropTypes.func.isRequired
+  changeDrawable: PropTypes.func.isRequired,
+  givePoint: PropTypes.func.isRequired,
+  selectSimpleBomb: PropTypes.func.isRequired,
+  selectMegaBomb: PropTypes.func.isRequired
 }
 
 export default Board;

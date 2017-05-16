@@ -16,6 +16,19 @@ export const changeDrawable = () => ({
   type: 'CHANGE_DRAWABLE'
 })
 
+export const givePoint = (points = 1) => ({
+  type: 'GIVE_POINT',
+  points: points
+})
+
+export const selectSimpleBomb = () => ({
+  type: 'SELECT_SIMPLE_BOMB'
+})
+
+export const selectMegaBomb = () => ({
+  type: 'SELECT_MEGA_BOMB'
+})
+
 export const pickColor = (c) => ({
   type: 'PICK_COLOR',
   color: c
