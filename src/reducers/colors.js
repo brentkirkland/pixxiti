@@ -1,8 +1,8 @@
 const colors = (state = new Uint8ClampedArray(40,40), action) => {
   switch (action.type) {
     case 'CHANGE_COLOR':
-
       if (state.length !== 0) {
+        console.log('change color!')
         const index_i = action.i * 4
         const index_j = action.j * 4
         var index;
