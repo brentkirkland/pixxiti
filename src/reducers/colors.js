@@ -1,4 +1,4 @@
-const colors = (state = new Uint8ClampedArray(40,40), action) => {
+const colors = (state = new Uint8ClampedArray(200,200), action) => {
   switch (action.type) {
     case 'CHANGE_COLOR':
 
@@ -7,7 +7,7 @@ const colors = (state = new Uint8ClampedArray(40,40), action) => {
         const index_j = action.j * 4
         var index;
         if (index_i > 0) {
-          index = (index_i )*50 + index_j
+          index = (index_i )*200 + index_j
         } else {
           index = index_i + index_j
         }

@@ -52,10 +52,10 @@ class Board extends Component {
   renderASquare () {
     var ctx = this.refs.canvas.getContext("2d");
     var x;
-    if (this.props.board.length === 10000) {
-      x = new ImageData(this.props.board, 50, 50)
+    if (this.props.board.length === 40000) {
+      x = new ImageData(this.props.board, 100, 100)
     } else {
-      x = new ImageData(50, 50)
+      x = new ImageData(100, 100)
     }
     ctx.putImageData(x,0,0)
   }
@@ -79,8 +79,8 @@ class Board extends Component {
       && e.button === 0
       && this.props.camera.moveable
       && this.props.camera.zoom === 4) {
-      var bld = this.props.camera.transX*this.props.camera.zoom + this.props.camera.width/2 - 50*this.props.camera.zoom/2
-      var btd = this.props.camera.transY*this.props.camera.zoom + this.props.camera.height/2 - 50*this.props.camera.zoom/2
+      var bld = this.props.camera.transX*this.props.camera.zoom + this.props.camera.width/2 - 100*this.props.camera.zoom/2
+      var btd = this.props.camera.transY*this.props.camera.zoom + this.props.camera.height/2 - 100*this.props.camera.zoom/2
       var prevX = -1*(e.clientX - bld - 100)/4
       var prevY = -1*(e.clientY - btd - 100)/4
       var transX = -1*(e.clientX - bld - 100)/4
@@ -94,9 +94,9 @@ class Board extends Component {
       if (this.props.camera.transX === this.props.camera.prevX
       && this.props.camera.transY === this.props.camera.prevY
       && this.props.draw.color !== -1) {
-        bld = this.props.camera.transX*this.props.camera.zoom + this.props.camera.width/2 - 50*this.props.camera.zoom/2
+        bld = this.props.camera.transX*this.props.camera.zoom + this.props.camera.width/2 - 100*this.props.camera.zoom/2
         var i = Math.floor((e.clientX - bld)/this.props.camera.zoom)
-        btd = this.props.camera.transY*this.props.camera.zoom + this.props.camera.height/2 - 50*this.props.camera.zoom/2
+        btd = this.props.camera.transY*this.props.camera.zoom + this.props.camera.height/2 - 100*this.props.camera.zoom/2
         var j = Math.floor((e.clientY - btd)/this.props.camera.zoom)
         if (this.props.draw.drawable && this.props.camera.moveable) {
           console.log('fuckkkk')
@@ -144,7 +144,7 @@ class Board extends Component {
       </div>
       <div className="pixxiti-container" style={{height: this.props.camera.height, width: this.props.camera.width}}>
           <div className="pixxiti-viewer"
-            style={{flex: '0 0 50px', transform: 'scale(' + this.props.camera.zoom + ',' + this.props.camera.zoom + ')'}}>
+            style={{flex: '0 0 100px', transform: 'scale(' + this.props.camera.zoom + ',' + this.props.camera.zoom + ')'}}>
             <div className={this.get_camera_css()}
               style={{transform: 'translate(' + this.props.camera.transX + 'px,'+ this.props.camera.transY + 'px)'}}
               onMouseDown={this.mouseDown.bind(this)}
@@ -152,7 +152,7 @@ class Board extends Component {
               onMouseLeave={this.mouseUp.bind(this)}
               onContextMenu={this.onContextMenu.bind(this)}
               onMouseMove={this.mouseMove.bind(this)}>
-              <canvas ref="canvas" height={50} width={50}/>
+              <canvas ref="canvas" height={100} width={100}/>
             </div>
           </div>
         </div>
