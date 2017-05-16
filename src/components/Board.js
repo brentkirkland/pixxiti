@@ -49,7 +49,6 @@ class Board extends Component {
     //     this.props.getBoard(json);
     // })
     var arr = []
-    console.log("creating")
     for(var i = 0; i < 50; i++) {
       var arrs = []
       for (var j = 0; j < 50; j++) {
@@ -57,7 +56,6 @@ class Board extends Component {
       }
       arr.push(arrs)
     }
-    console.log('pushing!')
     this.props.getBoard(arr);
   }
 
@@ -99,7 +97,7 @@ class Board extends Component {
       var transY = -1*(e.clientY - btd - 100)/4
       this.props.mouseUpOne(40, false, prevX, prevY, transX, transY)
       this.props.changeDrawable()
-    } else if (e.button === 2) {
+    } else if (e.button === 2 && this.props.camera.zoom === 40) {
       this.props.mouseUpTwo(4, false, this.props.camera.transX, this.props.camera.transY)
       this.props.changeDrawable()
     } else {
@@ -111,8 +109,6 @@ class Board extends Component {
         btd = this.props.camera.transY*this.props.camera.zoom + this.props.camera.height/2 - 50*this.props.camera.zoom/2
         var j = Math.floor((e.clientY - btd)/this.props.camera.zoom)
         if (this.props.draw.drawable && this.props.camera.moveable) {
-          console.log('fuckkkk')
-          console.log(this.props.powers)
           var a, b
           if (this.props.powers.megaBomb) {
             for (a = i - 7; a < i + 8; a++) {
@@ -129,7 +125,7 @@ class Board extends Component {
                 this.updateBoard(a+1, b+1, this.props.draw.color + 1)
               }
             }
-            this.props.selectMegaBomb() 
+            this.props.selectMegaBomb()
           } else if (this.props.powers.simpleBomb) {
             for (a = i - 2; a < i + 3; a++) {
               for (b = j - 2; b < j + 3; b++) {
@@ -145,7 +141,7 @@ class Board extends Component {
                 this.updateBoard(a+1, b+1, this.props.draw.color + 1)
               }
             }
-            this.props.selectSimpleBomb() 
+            this.props.selectSimpleBomb()
           } else {
             this.props.onBoardClick(this.props.draw.color, j, i)
             firebase.database().ref('pixel').set({

@@ -1,13 +1,73 @@
 .Powers {
   color: white;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-right: 10px;
 }
 
 
 .Selector {
-  width: 100px;
-  background-color: green;
+  background-color: #ff3333;
+  padding: 5px;
+  margin: 5px;
+  border-radius: 2px;
+  cursor: pointer;
 }
 
+.Selector-active {
+  background-color: green;
+  padding: 5px;
+  margin: 5px;
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+.Gamble {
+  background-color: #00cc99;
+  padding: 5px;
+  margin: 5px;
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+.ExtraTime {
+  background-color: #666666;
+  color: black;
+  padding: 5px;
+  margin: 5px;
+  border-radius: 2px;
+}
+
+.ExtraTimeActive {
+
+}
+
+.Points {
+  margin: 10px;
+}
+
+.totalPoints {
+  margin: 0;
+  padding: 0;
+}
+
+.totalSub {
+  margin: 0;
+  padding: 0;
+}
+
+.bombTitle {
+  font-size: 1em;
+  padding: 0;
+  margin: 0;
+}
+
+.bombPoints {
+  font-size: .75em;
+  padding: 0;
+  margin: 0;
+}
 
 .pixxiti-camera {
   /*text-align: left;
@@ -89,6 +149,7 @@ canvas {
 .App-header {
   background-color: #222;
   padding: 5px;
+  padding-left: 10px;
   color: white;
   display: inline-block;
   display: flex;
