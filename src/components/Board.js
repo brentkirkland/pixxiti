@@ -43,20 +43,20 @@ class Board extends Component {
   }
 
   getBoard () {
-    // fetch('https://us-central1-pixxiti.cloudfunctions.net/getData')
-    // .then(res => res.json())
-    // .then(json => {
-    //     this.props.getBoard(json);
-    // })
-    var arr = []
-    for(var i = 0; i < 50; i++) {
-      var arrs = []
-      for (var j = 0; j < 50; j++) {
-        arrs.push(0)
-      }
-      arr.push(arrs)
-    }
-    this.props.getBoard(arr);
+    fetch('https://us-central1-pixxiti.cloudfunctions.net/getData')
+    .then(res => res.json())
+    .then(json => {
+        this.props.getBoard(json);
+    })
+    // var arr = []
+    // for(var i = 0; i < 50; i++) {
+    //   var arrs = []
+    //   for (var j = 0; j < 50; j++) {
+    //     arrs.push(0)
+    //   }
+    //   arr.push(arrs)
+    // }
+    // this.props.getBoard(arr);
   }
 
   renderASquare () {
