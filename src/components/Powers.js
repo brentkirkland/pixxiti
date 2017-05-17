@@ -81,7 +81,7 @@ class Powers extends Component {
   render () {
     return (
       <div className="Powers">
-        <div onMouseDown={this.selectMegaSelector.bind(this)} className="ExtraTime">
+        <div className="ExtraTime">
           <p className="bombTitle">-1 min</p>
           <p className="bombPoints">250 pts</p>
         </div>
