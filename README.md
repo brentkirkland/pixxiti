@@ -17,8 +17,6 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Folder Structure
 
-After creation, your project should look like this:
-
 ```
 my-app/
   README.md
@@ -27,7 +25,7 @@ my-app/
   public/
     index.html
     favicon.ico
-  datastore/          # this is Google Datastore deployment code
+  datastore/          # Google Datastore deployment code
     get_data/
       node_modules/
       index.js
@@ -37,19 +35,19 @@ my-app/
       index.js
       package.json
   src/
-    actions/
+    actions/          # Redux Actions
       index.js
-    components/
+    components/       # React Classes
       App.css
       App.js
       Board.js
       ColorPicker.js
       Powers.js
-    containers/
+    containers/       # Redux Binders
       VisibleBoard.js
       VisibleColorPicker.js
       VisiblePowers.js
-    reducers/
+    reducers/         # Redux Reducers
       camera.js
       colors.js
       draw.js
