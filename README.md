@@ -147,6 +147,6 @@ Run this command to get a full list of the options available:
 serve -h
 ```
 
-# Usage
+## Usage
 
 Once the Pixxiti site you can start playing. Click the board in a desired area, pick a color of your liking, then click the board to place a pixel color. The board will update. As you place more pixels you will gain more points. More points reward you power-ups and higher ranking on the leader board. Can you be #1?
