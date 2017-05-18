@@ -18,7 +18,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ## Folder Structure
 
 ```
-my-app/
+pixxiti/
   README.md
   node_modules/
   package.json
