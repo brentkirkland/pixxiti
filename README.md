@@ -13,6 +13,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 - [Supported Language Features and Polyfills](#supported-language-features-and-polyfills)
 - [Deployment](#deployment)
   - [Static Server](#static-server)
+- [Usage](#usage)
 
 ## Folder Structure
 
@@ -26,6 +27,15 @@ my-app/
   public/
     index.html
     favicon.ico
+  datastore/          # this is Google Datastore deployment code
+    get_data/
+      node_modules/
+      index.js
+      package.json
+    put_data/
+      node_modules/
+      index.js
+      package.json
   src/
     actions/
       index.js
@@ -138,3 +148,7 @@ Run this command to get a full list of the options available:
 ```sh
 serve -h
 ```
+
+# Usage
+
+Once the Pixxiti site you can start playing. Click the board in a desired area, pick a color of your liking, then click the board to place a pixel color. The board will update. As you place more pixels you will gain more points. More points reward you power-ups and higher ranking on the leader board. Can you be #1?
