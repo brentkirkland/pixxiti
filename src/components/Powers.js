@@ -58,6 +58,24 @@ class Powers extends Component {
     }
   }
 
+  renderBotButton () {
+    if (!this.props.powers.bot) {
+      return (
+        <div className="BotButton" onMouseDown={this.getBot.bind(this)}>
+          <p className="bombTitle">Bot</p>
+          <p className="bombPoints">??? pts</p>
+        </div>
+      )
+    } else {
+      return (
+        <div className="BotButton-active" onMouseDown={this.getBot.bind(this)}>
+          <p className="bombTitle">Bot</p>
+          <p className="bombPoints">??? pts</p>
+        </div>
+      )
+    }
+  }
+
   getRandomArbitrary(min, max) {
     return Math.floor(Math.random() * (max - min)) + min;
   }
@@ -78,9 +96,28 @@ class Powers extends Component {
     }
   }
 
+  rendeerBotStatus () {
+    return (
+      <div className="botStatus">
+        <p className="bombPoints">Bot Status</p>
+        <p className="bombTitle">{this.props.powers.botStatus}</p>
+      </div>
+    )
+  }
+
+  getBot () {
+    if (this.props.powers.botStatus === "waiting") {
+      this.props.activateBot()
+    } else {
+
+    }
+  }
+
   render () {
     return (
       <div className="Powers">
+        {this.rendeerBotStatus()}
+        {this.renderBotButton()}
         <div className="ExtraTime">
           <p className="bombTitle">-1 min</p>
           <p className="bombPoints">250 pts</p>
@@ -104,7 +141,8 @@ Powers.propTypes = {
   powers: PropTypes.object.isRequired,
   selectSimpleBomb: PropTypes.func.isRequired,
   selectMegaBomb: PropTypes.func.isRequired,
-  givePoint: PropTypes.func.isRequired
+  givePoint: PropTypes.func.isRequired,
+  activateBot: PropTypes.func.isRequired
 }
 
 export default Powers;

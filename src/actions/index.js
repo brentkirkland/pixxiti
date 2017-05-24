@@ -34,7 +34,47 @@ export const pickColor = (c) => ({
   color: c
 })
 
+//bot
 
+export const activateBot = () => ({
+  type: 'ACTIVATE_BOT'
+})
+
+export const deactivateBot = () => ({
+  type: 'DEACTIVATE_BOT',
+})
+
+export const updateBotI = (x) => ({
+  type: 'UPDATE_BOT_I',
+  payload: x
+})
+
+export const updateBotJ = (x) => ({
+  type: 'UPDATE_BOT_J',
+  payload: x
+})
+
+export const updateBotArrayText = (x) => ({
+  type: 'UPDATE_BOT_ARRAY_TEXT',
+  payload: x
+})
+
+export const botError = (x) => ({
+  type: 'BOT_ERROR',
+  payload: x
+})
+
+export const startBot = (x) => ({
+  type: 'START_BOT',
+  payload: x
+})
+
+export const updatePlaceIJ = (i,j, bot) => ({
+  type: 'UPDATE_PLACE',
+  i: i,
+  j: j,
+  bot: bot
+})
 
 // CAMERA actions
 

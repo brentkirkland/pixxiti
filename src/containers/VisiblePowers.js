@@ -1,7 +1,8 @@
 import { connect } from 'react-redux'
 import { selectSimpleBomb,
 		 selectMegaBomb,
-		 givePoint
+		 givePoint,
+		 activateBot
 	  		 } from '../actions'
 import Powers from '../components/Powers'
 
@@ -12,6 +13,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = {
   selectSimpleBomb : selectSimpleBomb,
   selectMegaBomb: selectMegaBomb,
+	activateBot: activateBot,
   givePoint: givePoint
 }
 

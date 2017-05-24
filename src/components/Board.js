@@ -32,6 +32,7 @@ class Board extends Component {
     }, this)
     this.renderASquare()
     window.addEventListener('resize', this.handleResize.bind(this));
+    setInterval(this.doBotThings.bind(this), 2000)
   }
 
   componentDidUpdate () {
@@ -46,7 +47,80 @@ class Board extends Component {
     fetch('https://us-central1-pixxiti.cloudfunctions.net/getData')
     .then(res => res.json())
     .then(json => {
-        this.props.getBoard(json);
+        // this.props.getBoard(json);
+        var str = json.str;
+
+        var totalArray = [];
+        for (var i = 0; i < 50; i++) {
+          var bottomArray = []
+          for (var j = 0; j < 50; j++) {
+
+            var index;
+            if (i > 0) {
+              index = i*50 + j
+            } else {
+              index = i + j
+            }
+
+            switch (str[index]) {
+              case '0':
+                bottomArray.push(0)
+                break;
+              case '1':
+                bottomArray.push(1)
+                break;
+              case '2':
+                bottomArray.push(2)
+                break;
+              case '3':
+                bottomArray.push(3)
+                break;
+              case '4':
+                bottomArray.push(4)
+                break;
+              case '5':
+                bottomArray.push(5)
+                break;
+              case '6':
+                bottomArray.push(6)
+                break;
+              case '7':
+                bottomArray.push(7)
+                break;
+              case '8':
+                bottomArray.push(8)
+                break;
+              case '9':
+                bottomArray.push(9)
+                break;
+              case 'A':
+                bottomArray.push(10)
+                break;
+              case 'B':
+                bottomArray.push(11)
+                break;
+              case 'C':
+                bottomArray.push(12)
+                break;
+              case 'D':
+                bottomArray.push(13)
+                break;
+              case 'E':
+                bottomArray.push(14)
+                break;
+              case 'F':
+                bottomArray.push(15)
+                break;
+              default:
+                bottomArray.push(0)
+                break;
+            }
+
+          }
+          totalArray.push(bottomArray)
+        }
+
+        this.props.getBoard(totalArray);
     })
     // var arr = []
     // for(var i = 0; i < 50; i++) {
@@ -179,9 +253,392 @@ class Board extends Component {
     }
   }
 
+  renderPopUp() {
+    if (this.props.powers.botStatus === "activating") {
+      return (
+        <div className="BackgroundPop" style={{height: this.props.camera.height, width: this.props.camera.width}}>
+          <div className="Pop"  style={{width: this.props.camera.width/2}}>
+            <h2>Hi, I'm Bot</h2>
+            <p>I'm not the smartest, but I can help.</p>
+            <p>I require 1 pt for each pixel I place. If no one tampered with my work once I finished, I will give all the pts back.</p>
+            <h3>Starting Point:</h3>
+              <div>
+                Row: <input onChange={this.onRowChange.bind(this)} className="inputIndex" type="number"/>
+              Column: <input onChange={this.onColumnChange.bind(this)} className="inputIndex" width="30" type="number"/>
+              </div>
+            <h3>Sequence: </h3>
+            <p> There are 16 colors and I only know hex (0-F). Use X to skip a pixel. Seperate new lines by a comma.</p>
+            <textarea  onChange={this.onSequenceChange.bind(this)} className="inputSequence" placeholder="0A0A0A0,0A0A000,0AAA080,0A0A0A0,0A0A0A0"/>
+            {this.renderBotError()}
+            <div className={"popUpButtonDiv"}>
+              <div className={"cancelPop"} onMouseDown={this.deactivateBot.bind(this)}>Cancel</div>
+              <div className={"activatePop"} onMouseDown={this.onActivate.bind(this)}>Activate</div>
+            </div>
+          </div>
+        </div>
+      )
+    }
+  }
+
+  renderBotError() {
+    if (this.props.powers.botError !== "") {
+      return (
+        <p className="botError">{this.props.powers.botError}</p>
+      )
+
+    }
+  }
+
+  onRowChange(e) {
+    this.props.updateBotI(e.target.value)
+  }
+
+  onColumnChange(e) {
+    this.props.updateBotJ(e.target.value)
+  }
+
+  onSequenceChange(e) {
+    this.props.updateBotArrayText(e.target.value)
+  }
+
+  onActivate() {
+    var error = false;
+    var errorStr = ""
+    if (this.props.powers.botI >= 0 && this.props.powers.botI < 200) {
+
+    } else {
+      errorStr = "Row index needs to be larger than 0 and less than 200. "
+      error = true;
+    }
+
+    if (this.props.powers.botJ >= 0 && this.props.powers.botJ < 200) {
+
+    } else {
+      errorStr += "Column index needs to be larger than 0 and less than 200. "
+      error = true;
+    }
+
+    var new_plain_str = this.props.powers.botArrayText.toUpperCase().replace(/\s/g, "").split(',');
+    if (this.props.powers.botArrayText === "") {
+      errorStr += "Needs sequence. "
+      error = true;
+    } else {
+
+    }
+
+    if (error) {
+      this.props.botError(errorStr)
+    } else {
+      var botArray = []
+      for (var i = 0; i < new_plain_str.length; i++) {
+        var botInnerArray = []
+        for (var j = 0; j < new_plain_str[i].length; j++) {
+          if (new_plain_str[i][j] === '0') {
+            botInnerArray.push(0)
+          } else if (new_plain_str[i][j] === '1') {
+            botInnerArray.push(1)
+          } else if (new_plain_str[i][j] === '2') {
+            botInnerArray.push(2)
+          } else if (new_plain_str[i][j] === '3') {
+            botInnerArray.push(3)
+          } else if (new_plain_str[i][j] === '4') {
+            botInnerArray.push(4)
+          } else if (new_plain_str[i][j] === '5') {
+            botInnerArray.push(5)
+          } else if (new_plain_str[i][j] === '6') {
+            botInnerArray.push(6)
+          } else if (new_plain_str[i][j] === '7') {
+            botInnerArray.push(7)
+          } else if (new_plain_str[i][j] === '8') {
+            botInnerArray.push(8)
+          } else if (new_plain_str[i][j] === '9') {
+            botInnerArray.push(9)
+          } else if (new_plain_str[i][j] === 'A') {
+            botInnerArray.push(10)
+          } else if (new_plain_str[i][j] === 'B') {
+            botInnerArray.push(11)
+          } else if (new_plain_str[i][j] === 'C') {
+            botInnerArray.push(12)
+          } else if (new_plain_str[i][j] === 'D') {
+            botInnerArray.push(13)
+          } else if (new_plain_str[i][j] === 'E') {
+            botInnerArray.push(14)
+          } else if (new_plain_str[i][j] === 'F') {
+            botInnerArray.push(15)
+          } else if (new_plain_str[i][j] === 'X') {
+            botInnerArray.push(-1)
+          } else {
+            botInnerArray.push(0)
+          }
+        }
+        botArray.push(botInnerArray)
+      }
+    }
+    this.props.startBot(botArray)
+  }
+
+  doNothing () {
+
+  }
+
+  deactivateBot () {
+    this.props.deactivateBot()
+  }
+
+  doBotThings () {
+    if (this.props.powers.bot && this.props.powers.points > 0) {
+      var placeI;
+      var placeJ;
+      if (this.props.powers.placeI === undefined) {
+        placeI = 0;
+      } else {
+        placeI = this.props.powers.placeI
+      }
+      if (this.props.powers.placeJ === undefined) {
+        placeJ = 0;
+      } else {
+        placeJ = this.props.powers.placeJ
+      }
+      var botI = parseInt(this.props.powers.botI, 10) + placeI
+      var botJ = parseInt(this.props.powers.botJ, 10) + placeJ
+      if (this.props.powers.botArray[placeI][placeJ] !== -1 && this.props.powers.botArray[placeI][placeJ] !== undefined) {
+        firebase.database().ref('pixel').set({
+          x: botJ,
+          y: botI,
+          c: this.props.powers.botArray[placeI][placeJ]
+        });
+        this.props.onBoardClick(this.props.powers.botArray[placeI][placeJ], botI, botJ)
+        this.updateBoard(botJ+1, botI+1, this.props.powers.botArray[placeI][placeJ] + 1)
+      }
+
+      if (this.props.powers.botArray[placeI][placeJ] !== undefined) {
+        this.props.givePoint(-2)
+      }
+
+      var iLen = this.props.powers.botArray.length
+      if (placeJ + 1 > this.props.powers.botArray[placeI].length) {
+        placeI += 1
+        placeJ = 0
+      } else {
+        placeJ += 1
+      }
+
+      if (placeI < iLen) {
+        this.props.updatePlaceIJ(placeI, placeJ, false)
+      } else {
+        var untampered = true
+        for (var i = 0; i < this.props.powers.botArray.length; i++) {
+          for (var j = 0; j < this.props.powers.botArray[i].length; j++) {
+            // console.log(this.props.powers.botArray[i][j])
+            var ii = parseInt(this.props.powers.botI, 10) + i;
+            var jj = parseInt(this.props.powers.botJ, 10) + j;
+            const index_i = ii * 4
+            const index_j = jj * 4
+            var index;
+            if (index_i > 0) {
+              index = (index_i )*50 + index_j
+            } else {
+              index = index_i + index_j
+            }
+            switch (this.props.powers.botArray[i][j]) {
+              case 0:
+                if (this.props.board[index] === 255 &&
+                    this.props.board[index + 1] === 255 &&
+                    this.props.board[index + 2] === 255 &&
+                    this.props.powers.botArray[i][j] === 0) {
+
+                } else {
+                  console.log(this.props.board[index])
+                  console.log('tampered', 0)
+                  untampered = false
+                }
+                break;
+              case 1:
+                if (this.props.board[index] === 228 &&
+                    this.props.board[index + 1] === 228 &&
+                    this.props.board[index + 2] === 228 &&
+                    this.props.powers.botArray[i][j] === 1) {
+
+                } else {
+                  console.log(this.props.board[index])
+                  console.log('tampered', 1)
+                  untampered = false
+                }
+                break;
+              case 2:
+                if (this.props.board[index] === 136 &&
+                    this.props.board[index + 1] === 136 &&
+                    this.props.board[index + 2] === 136 &&
+                    this.props.powers.botArray[i][j] === 2) {
+
+                } else {
+                  console.log('tampered', 2)
+                  untampered = false
+                }
+                break;
+              case 3:
+                if (this.props.board[index] === 34 &&
+                    this.props.board[index + 1] === 34 &&
+                    this.props.board[index + 2] === 34 &&
+                    this.props.powers.botArray[i][j] === 3) {
+
+                } else {
+                  console.log('tampered', 3)
+                  untampered = false
+                }
+                break;
+              case 4:
+                if (this.props.board[index] === 255 &&
+                    this.props.board[index + 1] === 167 &&
+                    this.props.board[index + 2] === 209 &&
+                    this.props.powers.botArray[i][j] === 4) {
+
+                } else {
+                  console.log('tampered', 4)
+                  untampered = false
+                }
+                break;
+              case 5:
+                if (this.props.board[index] === 229 &&
+                    this.props.board[index + 1] === 0 &&
+                    this.props.board[index + 2] === 0 &&
+                    this.props.powers.botArray[i][j] === 5) {
+
+                } else {
+                  console.log('tampered', 5)
+                  untampered = false
+                }
+                break;
+              case 6:
+                if (this.props.board[index] === 229 &&
+                    this.props.board[index + 1] === 149 &&
+                    this.props.board[index + 2] === 0 &&
+                    this.props.powers.botArray[i][j] === 6) {
+
+                } else {
+                  console.log('tampered', 6)
+                  untampered = false
+                }
+                break;
+              case 7:
+                if (this.props.board[index] === 160 &&
+                    this.props.board[index + 1] === 106 &&
+                    this.props.board[index + 2] === 66 &&
+                    this.props.powers.botArray[i][j] === 7) {
+
+                } else {
+                  console.log('tampered', 7)
+                  untampered = false
+                }
+                break;
+              case 8:
+                if (this.props.board[index] === 229 &&
+                    this.props.board[index + 1] === 217 &&
+                    this.props.board[index + 2] === 0 &&
+                    this.props.powers.botArray[i][j] === 8) {
+
+                } else {
+                  console.log('tampered', 8)
+                  untampered = false
+                }
+                break;
+              case 9:
+                if (this.props.board[index] === 148 &&
+                    this.props.board[index + 1] === 224 &&
+                    this.props.board[index + 2] === 68 &&
+                    this.props.powers.botArray[i][j] === 9) {
+
+                } else {
+                  console.log('tampered', 9)
+                  untampered = false
+                }
+                break;
+              case 10:
+                if (this.props.board[index] === 2 &&
+                    this.props.board[index + 1] === 190 &&
+                    this.props.board[index + 2] === 1 &&
+                    this.props.powers.botArray[i][j] === 10) {
+
+                } else {
+                  console.log('tampered', 10)
+                  untampered = false
+                }
+                break;
+              case 11:
+                if (this.props.board[index] === 0 &&
+                    this.props.board[index + 1] === 211 &&
+                    this.props.board[index + 2] === 221 &&
+                    this.props.powers.botArray[i][j] === 11) {
+
+                } else {
+                  console.log('tampered', 11)
+                  untampered = false
+                }
+                break;
+              case 12:
+                if (this.props.board[index] === 0 &&
+                    this.props.board[index + 1] === 131 &&
+                    this.props.board[index + 2] === 199 &&
+                    this.props.powers.botArray[i][j] === 12) {
+
+                } else {
+                  console.log('tampered', 12)
+                  untampered = false
+                }
+                break;
+              case 13:
+                if (this.props.board[index] === 0 &&
+                    this.props.board[index + 1] === 0 &&
+                    this.props.board[index + 2] === 228 &&
+                    this.props.powers.botArray[i][j] === 13) {
+
+                } else {
+                  console.log('tampered', 13)
+                  untampered = false
+                }
+                break;
+              case 14:
+                if (this.props.board[index] === 207 &&
+                    this.props.board[index + 1] === 110 &&
+                    this.props.board[index + 2] === 228 &&
+                    this.props.powers.botArray[i][j] === 14) {
+
+                } else {
+                  console.log('tampered', 14)
+                  untampered = false
+                }
+                break;
+              case 15:
+                if (this.props.board[index] === 130 &&
+                    this.props.board[index + 1] === 0 &&
+                    this.props.board[index + 2] === 128 &&
+                    this.props.powers.botArray[i][j] === 15) {
+
+                } else {
+                  console.log('tampered', 15)
+                  untampered = false
+                }
+                break;
+              default:
+                // untampered = false
+                break;
+            }
+          }
+        }
+
+        if (untampered) {
+          this.props.updatePlaceIJ(69, 69, true)
+        } else {
+          this.props.updatePlaceIJ(0, 0, true)
+        }
+      }
+    }
+  }
+
   render() {
     return (
       <div className="pixxiti">
+      {this.renderPopUp()}
       <div className="top">
         <div className="App-header">
           <h2>Pixxiti</h2>
@@ -224,7 +681,14 @@ Board.propTypes = {
   changeDrawable: PropTypes.func.isRequired,
   givePoint: PropTypes.func.isRequired,
   selectSimpleBomb: PropTypes.func.isRequired,
-  selectMegaBomb: PropTypes.func.isRequired
+  selectMegaBomb: PropTypes.func.isRequired,
+  deactivateBot: PropTypes.func.isRequired,
+  updateBotArrayText: PropTypes.func.isRequired,
+  updateBotI: PropTypes.func.isRequired,
+  updateBotJ: PropTypes.func.isRequired,
+  botError: PropTypes.func.isRequired,
+  startBot: PropTypes.func.isRequired,
+  updatePlaceIJ: PropTypes.func.isRequired
 }
 
 export default Board;

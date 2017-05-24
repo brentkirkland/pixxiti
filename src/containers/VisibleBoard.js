@@ -10,7 +10,14 @@ import { changeColor,
          changeDrawable,
          givePoint,
          selectSimpleBomb,
-         selectMegaBomb
+         selectMegaBomb,
+         deactivateBot,
+         updateBotI,
+         updateBotJ,
+         updateBotArrayText,
+         botError,
+         startBot,
+         updatePlaceIJ
        } from '../actions'
 import Board from '../components/Board'
 
@@ -33,7 +40,14 @@ const mapDispatchToProps = {
   changeDrawable: changeDrawable,
   givePoint: givePoint,
   selectSimpleBomb: selectSimpleBomb,
-  selectMegaBomb: selectMegaBomb
+  selectMegaBomb: selectMegaBomb,
+  deactivateBot: deactivateBot,
+  updateBotI: updateBotI,
+  updateBotJ: updateBotJ,
+  updateBotArrayText: updateBotArrayText,
+  botError: botError,
+  startBot: startBot,
+  updatePlaceIJ: updatePlaceIJ
 }
 
 const VisibleBoard = connect(
