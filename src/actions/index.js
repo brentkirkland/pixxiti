@@ -40,6 +40,10 @@ export const activateBot = () => ({
   type: 'ACTIVATE_BOT'
 })
 
+export const botLoaded = () => ({
+  type: 'BOT_LOADED'
+})
+
 export const deactivateBot = () => ({
   type: 'DEACTIVATE_BOT',
 })

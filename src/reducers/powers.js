@@ -1,5 +1,5 @@
 var initial_state = {
-  points: parseInt(localStorage['myKey'], 10) || 0,
+  points: parseInt(localStorage['myKey'], 10) || 1000,
   simpleBomb: false,
   megaBomb: false,
   bot: false,
@@ -9,7 +9,7 @@ var initial_state = {
   placeI: undefined,
   placeJ: undefined,
   botArrayText: '',
-  botStatus: 'waiting',
+  botStatus: 'loading',
   botError: '',
   placed: false
 }
@@ -20,10 +20,13 @@ const powers = (state = initial_state, action) => {
     case 'GIVE_POINT':
       new_state.points += action.points
       new_state.placed = !new_state.placed
-      localStorage['myKey'] = parseInt(localStorage['myKey'], 10) + action.points
+      localStorage['myKey'] = new_state.points
       return Object.assign({}, new_state)
     case 'SELECT_SIMPLE_BOMB':
       new_state.simpleBomb = !new_state.simpleBomb
+      return Object.assign({}, new_state)
+    case 'BOT_LOADED':
+      new_state.botStatus = 'waiting'
       return Object.assign({}, new_state)
     case 'SELECT_MEGA_BOMB':
       new_state.megaBomb = !new_state.megaBomb
@@ -51,8 +54,9 @@ const powers = (state = initial_state, action) => {
             points += 1
           }
         }
-        if (action.i === 69) {
+        if (action.i === 42069) {
             new_state.points += points
+            localStorage['myKey'] = new_state.points
         }
         new_state.botStatus = 'waiting'
         new_state.bot = false

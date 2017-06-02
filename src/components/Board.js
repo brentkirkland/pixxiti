@@ -50,6 +50,7 @@ class Board extends Component {
     .then(json => {
         var str = json.str;
         this.props.getBoard(str);
+        this.props.botLoaded()
     })
     // var arr = []
     // for(var i = 0; i < 200; i++) {
@@ -65,7 +66,7 @@ class Board extends Component {
   renderASquare () {
     var ctx = this.refs.canvas.getContext("2d");
     var x;
-    if (this.props.board.length ===160000) {
+    if (this.props.board.length === 160000) {
       x = new ImageData(this.props.board, 200, 200)
     } else {
       x = new ImageData(200, 200)
@@ -193,7 +194,7 @@ class Board extends Component {
 
   renderPopUp() {
 
-    if (this.props.board.length !== 160000) {
+    if (this.props.powers.botStatus === "loading") {
       return (
         <div className="BackgroundPop" style={{height: this.props.camera.height, width: this.props.camera.width}}>
             <Loader color="#fff" size="16px" margin="4px"/>
@@ -249,6 +250,11 @@ class Board extends Component {
   onActivate() {
     var error = false;
     var errorStr = ""
+
+    console.log(this.props.powers.botI)
+    console.log(this.props.powers.botJ)
+    console.log(this.props.powers.botArrayText)
+
     if (this.props.powers.botI >= 0 && this.props.powers.botI < 200) {
 
     } else {
@@ -318,8 +324,8 @@ class Board extends Component {
         }
         botArray.push(botInnerArray)
       }
+      this.props.startBot(botArray)
     }
-    this.props.startBot(botArray)
   }
 
   doNothing () {
@@ -573,7 +579,7 @@ class Board extends Component {
         }
 
         if (untampered) {
-          this.props.updatePlaceIJ(69, 69, true)
+          this.props.updatePlaceIJ(42069, 42069, true)
         } else {
           this.props.updatePlaceIJ(0, 0, true)
         }
@@ -634,7 +640,8 @@ Board.propTypes = {
   updateBotJ: PropTypes.func.isRequired,
   botError: PropTypes.func.isRequired,
   startBot: PropTypes.func.isRequired,
-  updatePlaceIJ: PropTypes.func.isRequired
+  updatePlaceIJ: PropTypes.func.isRequired,
+  botLoaded: PropTypes.func.isRequired
 }
 
 export default Board;

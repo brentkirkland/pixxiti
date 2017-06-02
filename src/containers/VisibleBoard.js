@@ -17,7 +17,8 @@ import { changeColor,
          updateBotArrayText,
          botError,
          startBot,
-         updatePlaceIJ
+         updatePlaceIJ,
+         botLoaded,
        } from '../actions'
 import Board from '../components/Board'
 
@@ -47,7 +48,8 @@ const mapDispatchToProps = {
   updateBotArrayText: updateBotArrayText,
   botError: botError,
   startBot: startBot,
-  updatePlaceIJ: updatePlaceIJ
+  updatePlaceIJ: updatePlaceIJ,
+  botLoaded: botLoaded
 }
 
 const VisibleBoard = connect(

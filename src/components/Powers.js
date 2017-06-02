@@ -23,7 +23,14 @@ class Powers extends Component {
   }
 
   renderSimpleBomb () {
-    if (this.props.powers.simpleBomb) {
+    if (this.props.powers.points < 50) {
+      return (
+        <div className="Selector-no-points">
+          <p className="bombTitle">Small</p>
+          <p className="bombPoints">50 pts</p>
+        </div>
+      )
+    } else if (this.props.powers.simpleBomb) {
       return (
         <div onMouseDown={this.selectSimpleSelector.bind(this)} className="Selector-active">
           <p className="bombTitle">Small</p>
@@ -41,7 +48,14 @@ class Powers extends Component {
   }
 
   renderMegaBomb () {
-    if (this.props.powers.megaBomb) {
+    if (this.props.powers.points < 500) {
+      return (
+        <div className="Selector-no-points">
+          <p className="bombTitle">Mega</p>
+          <p className="bombPoints">500 pts</p>
+        </div>
+      )
+    } else if (this.props.powers.megaBomb) {
       return (
         <div onMouseDown={this.selectMegaSelector.bind(this)} className="Selector-active">
           <p className="bombTitle">Mega</p>
@@ -113,6 +127,24 @@ class Powers extends Component {
     }
   }
 
+  renderSpin() {
+    if (this.props.powers.points < 100) {
+      return (
+        <div className="Selector-no-points">
+          <p className="bombTitle">Spin</p>
+          <p className="bombPoints">100 pts</p>
+        </div>
+      )
+    } else {
+      return (
+        <div onMouseDown={this.gamble.bind(this)} className="Gamble">
+          <p className="bombTitle">Spin</p>
+          <p className="bombPoints">100 pts</p>
+        </div>
+      )
+    }
+  }
+
   render () {
     return (
       <div className="Powers">
@@ -122,10 +154,7 @@ class Powers extends Component {
           <p className="bombTitle">-1 min</p>
           <p className="bombPoints">250 pts</p>
         </div>
-        <div onMouseDown={this.gamble.bind(this)} className="Gamble">
-          <p className="bombTitle">Spin</p>
-          <p className="bombPoints">100 pts</p>
-        </div>
+        {this.renderSpin()}
         {this.renderSimpleBomb()}
         {this.renderMegaBomb()}
         <div className="Points">
