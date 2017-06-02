@@ -4,6 +4,7 @@
 /node_modules
 /datastore/get_data/node_modules
 /datastore/put_data/node_modules
+/datastore/sub_update/node_modules
 
 # testing
 /coverage
