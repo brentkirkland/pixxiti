@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "pixxiti",
+  "private_key_id": "3f965659c3e9496b68987a488999563e29c7fac7",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDqe0npunXWGv3k\nch1lz3iDgLKLDRv5kN4PFotVG7FVaY88Z5vpWH3QSVAS8Cbe7zXCHB7wxsPu6v4p\naxIF0x81PicFULXs7sVkqTsRd+Frzavb/3EmfZIP0LFPvaiuUuBf2A6IaTpJn/W2\ntqUPD7VY/eaU5r3ujLnYBqfwhlXK5c0i86ga5TsUnV7uIAiMNLK6K87npiBnvTP7\nbrB9/nGT57sKiInxl3+fTNnvxlm2cTUDV/keRoZVFLHx8jFxUeePl3alsCLqDjbv\ni7IT3J2UcF8u80/pSytqsmwUr3XL8uVAl1SYYxpBmQJmtB5yNk+eE8aWLIcYKOSd\nRK8XodVlAgMBAAECggEAXVexB8tDZ3UdRxiqXUInHmpYKQSR81pZG7aExt+cS30X\nGRvBtDWW+BiHONLDFpIxW1Foe78UdoKzpPdLmGgAD2jrjbEgiu5ORBEeQ4jugsTA\nOnbIq2Lnh0Yzn6PHh4XUbjMLLgB9xJtZ7F9u+7zsGz4P0Yy9ZT4+KSIVLqm7c2Ye\nerQa5M4rcvdHEdb9V1Q2XMuKBWkDeUYPAAVLS9ELsaaciISO12MHCbHzXL0DBGC1\nEUgqny60+sEMWX2JPVM9DmDhBS+66M1XyW7zVsN3SjejPz4IL+BtLCgHHjL6Xcpb\nCPV9QskVYJHDTm1q/XKcGfaA2+DYi5pj65t57QlDrQKBgQD+lebONdmHsPxZJUzt\nmYMddjTFRTly1IpAD8eGZWu56JAE5oht+GKCbtlUPRqV2UZDuYkEtMOgQDdGyHK9\nz6NHcKLAwOnaKl/1xfGiHn9iol2W5MJWdx2KD9SwEe7swGinPanwk0cGbDqDh2BJ\n/2+pv0A3LEUNYB/tbPHXghcU/wKBgQDryMsNUr/i6PwDn+LSvnnAqph3R9MkV+0J\nHWjcgcezRri5/GLehJYAbh0QLQesBoA/pEmr7uFm5/jfhiYzAeO/OH+nC+3beIb9\nGtEc8Xr2OLR1nsDVCtOH5TstQV140T8M3fVOqkV5n2OKXGu1peS/W5tbB80TVIbE\ncC4MsczhmwKBgBdonSJU3T2Wzn076sjmFqI83jlNVizy0gt15/i5lqAvfB6XO/Aw\nqI4ptx4ByFIC+mz7wFeIb3xqqyp8/9/oGbFV8AEdO+NthglJPCCWAUyGdWiMfDoL\nFdI+BmZyH6/xOS43g0q1oBA9H1w8tGPZcuD+zt7D2U2Tixv/qnUQZyLtAoGBAKPk\nFFAUftDIxbP3RQDb6WFks0nmIPuYKmk1ihgMFbWlqO2OY2Lsoh92ark9s6F9e1PB\nbHwYNZEEGVe1tYOrApV+Pizs+86b/qicJVKK/796NuWzDbKILfS9/947Gy/JspvN\nBKBDdrtNcTFRgITo5RGmKVyjFYckL/EHUNr+E72VAoGBALJGC+WpwCfRBmuTOvwT\n87Pw/5nCFxyWwKZsZGVFa5SlbJpdqtB+aNuZms0CSUsEdJcB+Rek+qSBdEeQx/lr\nNtV9y7i9uhYravb3JDDgAURTfNnmcF42LlU1feZVn6nPi9n6xkqCK1sbxG9xJesQ\nDLbiAH9PotL21CFi+M4y/STf\n-----END PRIVATE KEY-----\n",
+  "client_email": "monk-sub@pixxiti.iam.gserviceaccount.com",
+  "client_id": "110307642302455907677",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://accounts.google.com/o/oauth2/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/monk-sub%40pixxiti.iam.gserviceaccount.com"
+}

@@ -1,4 +1,6 @@
-const colors = (state = new Uint8ClampedArray(40,40), action) => {
+
+
+const colors = (state = new Uint8ClampedArray(160000), action) => {
   switch (action.type) {
     case 'CHANGE_COLOR':
       if (state.length !== 0) {
@@ -6,7 +8,7 @@ const colors = (state = new Uint8ClampedArray(40,40), action) => {
         const index_j = action.j * 4
         var index;
         if (index_i > 0) {
-          index = (index_i )*50 + index_j
+          index = (index_i )*200 + index_j
         } else {
           index = index_i + index_j
         }
@@ -139,68 +141,134 @@ const colors = (state = new Uint8ClampedArray(40,40), action) => {
       }
     case 'GET_BOARD':
       var start = action.payload
-      var meh = []
-      for (var j = 0; j < start.length; j++) {
-        for (var k = 0; k < start.length; k++) {
-          var color = [255, 255, 255, 255];
-          switch (start[j][k]) {
-            case 0:
-              color = [255, 255, 255, 255];
+      for (var j = 0; j < start.length*4; j += 4) {
+          // var color = [255, 255, 255, 255];
+          // var meh = new Array(160000)
+          switch (start[j/4]) {
+            case '0':
+              // color = [255, 255, 255, 255];
+              state[j]      = 255;
+              state[j + 1]  = 255;
+              state[j + 2]  = 255;
+              state[j + 3]  = 255;
               break;
-            case 1:
-              color = [228, 228, 228, 255];
+            case '1':
+              // color = [228, 228, 228, 255];
+              state[j]      = 228;
+              state[j + 1]  = 228;
+              state[j + 2]  = 228;
+              state[j + 3]  = 255;
               break;
-            case 2:
-              color = [136, 136, 136, 255];
+            case '2':
+              // color = [136, 136, 136, 255];
+              state[j]      = 136;
+              state[j + 1]  = 136;
+              state[j + 2]  = 136;
+              state[j + 3]  = 255;
               break;
-            case 3:
-              color =  [34, 34, 34, 255];
+            case '3':
+              // console.log('case three')
+              // color =  [34, 34, 34, 255];
+              state[j]      = 34;
+              state[j + 1]  = 34;
+              state[j + 2]  = 34;
+              state[j + 3]  = 255;
               break;
-            case 4:
-              color = [255, 167, 209, 255];
+            case '4':
+              // color = [255, 167, 209, 255];
+              state[j]      = 255;
+              state[j + 1]  = 167;
+              state[j + 2]  = 209;
+              state[j + 3]  = 255;
               break;
-            case 5:
-              color = [229, 0, 0, 255];
+            case '5':
+              // color = [229, 0, 0, 255];
+              state[j]      = 229;
+              state[j + 1]  = 0;
+              state[j + 2]  = 0;
+              state[j + 3]  = 255;
               break;
-            case 6:
-              color = [229, 149, 0, 255];
+            case '6':
+              // color = [229, 149, 0, 255];
+              state[j]      = 229;
+              state[j + 1]  = 149;
+              state[j + 2]  = 0;
+              state[j + 3]  = 255;
               break;
-            case 7:
-              color = [160, 106, 66, 255];
+            case '7':
+              // color = [160, 106, 66, 255];
+              state[j]      = 160;
+              state[j + 1]  = 106;
+              state[j + 2]  = 66;
+              state[j + 3]  = 255;
               break;
-            case 8:
-              color = [229, 217, 0, 255];
+            case '8':
+              // color = [229, 217, 0, 255];
+              state[j]      = 229;
+              state[j + 1]  = 217;
+              state[j + 2]  = 0;
+              state[j + 3]  = 255;
               break;
-            case 9:
-              color = [148, 224, 68, 255];
+            case '9':
+              // color = [148, 224, 68, 255];
+              state[j]      = 148;
+              state[j + 1]  = 224;
+              state[j + 2]  = 68;
+              state[j + 3]  = 255;
               break;
-            case 10:
-              color = [2, 190, 1, 255];
+            case 'A':
+              // color = [2, 190, 1, 255];
+              state[j]      = 2;
+              state[j + 1]  = 190;
+              state[j + 2]  = 1;
+              state[j + 3]  = 255;
               break;
-            case 11:
-              color = [0, 211, 221, 255];
+            case 'B':
+              // color = [0, 211, 221, 255];
+              state[j]      = 0;
+              state[j + 1]  = 211;
+              state[j + 2]  = 221;
+              state[j + 3]  = 255;
               break;
-            case 12:
-              color = [0, 131, 199, 255];
+            case 'C':
+              // color = [0, 131, 199, 255];
+              state[j]      = 0;
+              state[j + 1]  = 131;
+              state[j + 2]  = 199;
+              state[j + 3]  = 255;
               break;
-            case 13:
-              color = [0, 0, 228, 255];
+            case 'D':
+              // color = [0, 0, 228, 255];
+              state[j]      = 0;
+              state[j + 1]  = 0;
+              state[j + 2]  = 228;
+              state[j + 3]  = 255;
               break;
-            case 14:
-              color = [207, 110, 228, 255];
+            case 'E':
+              // color = [207, 110, 228, 255];
+              state[j]      = 207;
+              state[j + 1]  = 110;
+              state[j + 2]  = 228;
+              state[j + 3]  = 255;
               break;
-            case 15:
-              color = [130, 0, 128, 255];
+            case 'F':
+              // color = [130, 0, 128, 255];
+              state[j]      = 130;
+              state[j + 1]  = 0;
+              state[j + 2]  = 128;
+              state[j + 3]  = 255;
               break;
             default:
-              color = [255, 255, 255, 255];
+              // color = [255, 255, 255, 255];
+              state[j]      = 255;
+              state[j + 1]  = 255;
+              state[j + 2]  = 255;
+              state[j + 3]  = 255;
               break;
-          }
-          meh = meh.concat(color)
+          // meh = meh.concat(color)
         }
       }
-      meh = new Uint8ClampedArray(meh)
-      return meh
+      return state
     default:
       return state
   }

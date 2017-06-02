@@ -9,6 +9,7 @@
   "author": "Brent Kirkland",
   "license": "ISC",
   "dependencies": {
-    "@google-cloud/datastore": "^1.0.1"
+    "@google-cloud/datastore": "^1.0.1",
+    "@google-cloud/pubsub": "^0.12.0"
   }
 }
