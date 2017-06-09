@@ -23,7 +23,7 @@ var nearestColor = require('nearest-color').from(colors);
 nearestColor('#800'); // => { name: 'red', value: '#f00', rgb: { r: 255, g: 0, b: 0 } }
 nearestColor('#ffe'); // => { name: 'yellow', value: '#ff0', rgb: { r: 255, g: 255, b: 0 } }
 
-Jimp.read("Tux.png", function (err, image) {
+Jimp.read("eth.jpg", function (err, image) {
     if (err) throw err;
     str = '';
     count = 0;

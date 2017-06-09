@@ -150,10 +150,10 @@ class Powers extends Component {
       <div className="Powers">
         {this.rendeerBotStatus()}
         {this.renderBotButton()}
-        <div className="ExtraTime">
+        {/*<div className="ExtraTime">
           <p className="bombTitle">-1 min</p>
           <p className="bombPoints">250 pts</p>
-        </div>
+        </div>*/}
         {this.renderSpin()}
         {this.renderSimpleBomb()}
         {this.renderMegaBomb()}

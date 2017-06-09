@@ -1,6 +1,6 @@
 
 
-const colors = (state = new Uint8ClampedArray(160000), action) => {
+const colors = (state = new Uint8ClampedArray(640000), action) => {
   switch (action.type) {
     case 'CHANGE_COLOR':
       if (state.length !== 0) {
@@ -8,7 +8,7 @@ const colors = (state = new Uint8ClampedArray(160000), action) => {
         const index_j = action.j * 4
         var index;
         if (index_i > 0) {
-          index = (index_i )*200 + index_j
+          index = (index_i )*400 + index_j
         } else {
           index = index_i + index_j
         }
@@ -141,6 +141,7 @@ const colors = (state = new Uint8ClampedArray(160000), action) => {
       }
     case 'GET_BOARD':
       var start = action.payload
+      console.log('action.payload len', action.payload.length)
       for (var j = 0; j < start.length*4; j += 4) {
           // var color = [255, 255, 255, 255];
           // var meh = new Array(160000)
@@ -268,6 +269,7 @@ const colors = (state = new Uint8ClampedArray(160000), action) => {
           // meh = meh.concat(color)
         }
       }
+      console.log('sss', state.length)
       return state
     default:
       return state

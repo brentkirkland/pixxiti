@@ -15,7 +15,7 @@ const datastore = Datastore({
 const query = datastore.createQuery('stringboard')
 var topic = pubsub.topic('pixxitiTopic');
 var subscription = pubsub.subscription('pixxitiSubscription');
-var board_size = 200;
+var board_size = 400;
 var kind = 'stringboard';
 var name = '1';
 var taskKey = datastore.key([kind, name]);
@@ -24,6 +24,7 @@ datastore.runQuery(query)
 .then((results) => {
 
   var str = results[0][0].str;
+  console.log('results len', str.length)
   var count = 0;
   var totalCount = 0;
 

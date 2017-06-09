@@ -22,7 +22,7 @@ exports.putData = function putData (req, res) {
   let j = parseInt(req.query.j) - 1 || 0;
   let c = parseInt(req.query.c) - 1 || 0;
 
-  if (i > 199 || i < 0 || j > 199 || c < 0 || c > 15) {
+  if (i > 399 || i < 0 || j > 399 || c < 0 || c > 15) {
     i = 0;
     j = 0;
     c = 0;

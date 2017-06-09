@@ -33,7 +33,7 @@ class Board extends Component {
     }, this)
     this.renderASquare()
     window.addEventListener('resize', this.handleResize.bind(this));
-    setInterval(this.doBotThings.bind(this), 2000)
+    setInterval(this.doBotThings.bind(this), 250)
   }
 
   componentDidUpdate () {
@@ -66,10 +66,10 @@ class Board extends Component {
   renderASquare () {
     var ctx = this.refs.canvas.getContext("2d");
     var x;
-    if (this.props.board.length === 160000) {
-      x = new ImageData(this.props.board, 200, 200)
+    if (this.props.board.length === 640000) {
+      x = new ImageData(this.props.board, 400, 400)
     } else {
-      x = new ImageData(200, 200)
+      x = new ImageData(400, 400)
     }
     ctx.putImageData(x,0,0)
   }
@@ -93,12 +93,12 @@ class Board extends Component {
       && e.button === 0
       && this.props.camera.moveable
       && this.props.camera.zoom === 4) {
-      var bld = this.props.camera.transX*this.props.camera.zoom + this.props.camera.width/2 - 200*this.props.camera.zoom/2
-      var btd = this.props.camera.transY*this.props.camera.zoom + this.props.camera.height/2 - 200*this.props.camera.zoom/2
-      var prevX = -1*(e.clientX - bld - 400)/4
-      var prevY = -1*(e.clientY - btd - 400)/4
-      var transX = -1*(e.clientX - bld - 400)/4
-      var transY = -1*(e.clientY - btd - 400)/4
+      var bld = this.props.camera.transX*this.props.camera.zoom + this.props.camera.width/2 - 400*this.props.camera.zoom/2
+      var btd = this.props.camera.transY*this.props.camera.zoom + this.props.camera.height/2 - 400*this.props.camera.zoom/2
+      var prevX = -1*(e.clientX - bld - 800)/4
+      var prevY = -1*(e.clientY - btd - 800)/4
+      var transX = -1*(e.clientX - bld - 800)/4
+      var transY = -1*(e.clientY - btd - 800)/4
       this.props.mouseUpOne(40, false, prevX, prevY, transX, transY)
       this.props.changeDrawable()
     } else if (e.button === 2 && this.props.camera.zoom === 40) {
@@ -108,9 +108,9 @@ class Board extends Component {
       if (this.props.camera.transX === this.props.camera.prevX
       && this.props.camera.transY === this.props.camera.prevY
       && this.props.draw.color !== -1) {
-        bld = this.props.camera.transX*this.props.camera.zoom + this.props.camera.width/2 - 200*this.props.camera.zoom/2
+        bld = this.props.camera.transX*this.props.camera.zoom + this.props.camera.width/2 - 400*this.props.camera.zoom/2
         var i = Math.floor((e.clientX - bld)/this.props.camera.zoom)
-        btd = this.props.camera.transY*this.props.camera.zoom + this.props.camera.height/2 - 200*this.props.camera.zoom/2
+        btd = this.props.camera.transY*this.props.camera.zoom + this.props.camera.height/2 - 400*this.props.camera.zoom/2
         var j = Math.floor((e.clientY - btd)/this.props.camera.zoom)
         if (this.props.draw.drawable && this.props.camera.moveable) {
           var a, b
@@ -255,17 +255,17 @@ class Board extends Component {
     console.log(this.props.powers.botJ)
     console.log(this.props.powers.botArrayText)
 
-    if (this.props.powers.botI >= 0 && this.props.powers.botI < 200) {
+    if (this.props.powers.botI >= 0 && this.props.powers.botI < 400) {
 
     } else {
-      errorStr = "Row index needs to be larger than 0 and less than 200. "
+      errorStr = "Row index needs to be larger than 0 and less than 400. "
       error = true;
     }
 
-    if (this.props.powers.botJ >= 0 && this.props.powers.botJ < 200) {
+    if (this.props.powers.botJ >= 0 && this.props.powers.botJ < 400) {
 
     } else {
-      errorStr += "Column index needs to be larger than 0 and less than 200. "
+      errorStr += "Column index needs to be larger than 0 and less than 400. "
       error = true;
     }
 
@@ -388,7 +388,7 @@ class Board extends Component {
             const index_j = jj * 4
             var index;
             if (index_i > 0) {
-              index = (index_i )*200 + index_j
+              index = (index_i )*400 + index_j
             } else {
               index = index_i + index_j
             }
@@ -599,7 +599,7 @@ class Board extends Component {
       </div>
       <div className="pixxiti-container" style={{height: this.props.camera.height, width: this.props.camera.width}}>
           <div className="pixxiti-viewer"
-            style={{flex: '0 0 200px', transform: 'scale(' + this.props.camera.zoom + ',' + this.props.camera.zoom + ')'}}>
+            style={{flex: '0 0 400px', transform: 'scale(' + this.props.camera.zoom + ',' + this.props.camera.zoom + ')'}}>
             <div className={this.get_camera_css()}
               style={{transform: 'translate(' + this.props.camera.transX + 'px,'+ this.props.camera.transY + 'px)'}}
               onMouseDown={this.mouseDown.bind(this)}
@@ -607,7 +607,7 @@ class Board extends Component {
               onMouseLeave={this.mouseUp.bind(this)}
               onContextMenu={this.onContextMenu.bind(this)}
               onMouseMove={this.mouseMove.bind(this)}>
-              <canvas ref="canvas" height={200} width={200}/>
+              <canvas ref="canvas" height={400} width={400}/>
             </div>
           </div>
         </div>

@@ -22,6 +22,7 @@ pixxiti/
   README.md
   node_modules/
   package.json
+  botCoder/           # botImage maker - not perfect and secret ;)
   public/
     index.html
     favicon.ico
